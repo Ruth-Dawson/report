@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- bootstrap4 首先为移动设备优化代码，然后用css媒体查询来扩展组件 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>安全月报</title>
+    <!-- 引入bootstrap reboot为重置表 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap-reboot.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- 引入bootstrap-table -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <!-- bootstrap-table使用的是font-awesome图标需要引入 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container-fluid" id="app">
+      <!-- header -->
+
+      <div class="row header">
+        <!-- 头部 -->
+        <div class="logo-content col-12 d-flex justify-content-between align-items-center">
+          <div class="logo">
+            <a href="" class="d-flex align-items-center">
+              <img class="mw-100 h-auto" src="./img/logo.png" alt="" />
+              <span class="mx-3">悦华养老服务网络管理平台|BI系统</span>
+            </a>
+          </div>
+          <div class="report">
+            <a href="">
+              <span>数据月报</span>
+            </a>
+          </div>
+        </div>
+        <!-- 月份选项 -->
+        <div class="col-12 options d-flex align-items-center">
+          <!-- <div class="row"> -->
+          <div class="left col-3">
+            <select name="" id="">
+              <option value="">所有组织</option>
+              <option value="">组织1</option>
+              <option value="">组织2</option>
+            </select>
+            <!-- </div> -->
+          </div>
+          <div class="right col-9 d-flex">
+            <select name="" id="" class="mr-3">
+              <option value="">2020年</option>
+              <option value="">2019年</option>
+              <option value="">2018年</option>
+            </select>
+            <div class="months d-flex">
+              <div class="month" v-for="(item,index) in months" :key="index" :class="{active:isActive==index}" @click="monthClick(index)">
+                <a href="javascript:;">
+                  {{item}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 六大分类 -->
+        <ul class="nav nav-pills list d-flex align-items-end" id="pills-tab" role="tablist">
+          <li class="nav-item" @click="changeBox(0)">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#box0" role="tab" aria-controls="pills-home" aria-selected="true">平台使用情况</a>
+          </li>
+          <li class="nav-item" @click="changeBox(1)">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#box1" role="tab" aria-controls="pills-profile" aria-selected="false">客户咨询</a>
+          </li>
+          <li class="nav-item" @click="changeBox(2)">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#box2" role="tab" aria-controls="pills-contact" aria-selected="false">床位统计</a>
+          </li>
+          <li class="nav-item" @click="changeBox(3)">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#box3" role="tab" aria-controls="pills-contact" aria-selected="false">在院老人</a>
+          </li>
+          <li class="nav-item" @click="changeBox(4)">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#box4" role="tab" aria-controls="pills-contact" aria-selected="false">服务数据</a>
+          </li>
+          <li class="nav-item" @click="changeBox(5)">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#box5" role="tab" aria-controls="pills-contact" aria-selected="false">任务计划看板</a>
+          </li>
+        </ul>
+      </div>
+      <!-- nav -->
+      <div class="row content">
+        <div class="col-12">
+          <div class="tab-content box" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="box0" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div class="top bg-border">
+                <div class="overview d-flex flex-row justify-content-start">
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">318</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">访问时长(min)</span>
+                        <a
+                          class="bg"
+                          tabindex="0"
+                          title="提示"
+                          data-toggle="popover"
+                          data-trigger="focus"
+                          data-placement="bottom"
+                          data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                          >?</a
+                        >
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">100</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">总用户数</span>
+                        <a
+                          class="bg"
+                          tabindex="0"
+                          data-toggle="popover"
+                          title="提示"
+                          data-trigger="focus"
+                          data-placement="bottom"
+                          data-content="And here's some amazing content. It's very engaging. Right?"
+                          >?</a
+                        >
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">89</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">访问用户数</span>
+                        <span class="bg">?</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">103</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">访问频次</span>
+                        <span class="bg">?</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                </div>
+                <div class="content-chart d-flex">
+                  <div class="left">
+                    <div class="chart parent">
+                      <div class="top-chart h-50 son-50" ref="userinfo" id="pc"></div>
+                      <div class="bottom-chart h-50 son-50" id="mobile"></div>
+                    </div>
+                  </div>
+                  <div class="right">
+                    <div class="chart">
+                      <div class="title d-flex align-items-center">
+                        <span>访问时长排名</span>
+                      </div>
+                      <div>
+                        <table id="visit-time"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom">
+                <div class="content-table">
+                  <div class="title d-flex align-items-center">
+                    <span>使用内容明细</span>
+                  </div>
+                  <table id="content-detail"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="box1">
+              <div class="bg-border overview d-flex flex-row justify-content-start">
+                <div class="module h-100 d-flex align-items-center pl-2">
+                  <div class="info">
+                    <p class="number text-center">318</p>
+                    <div class="text-img d-flex justify-content-center">
+                      <span class="text d-block">总客资数</span>
+                      <span class="bg">?</span>
+                    </div>
+                  </div>
+                  <img src="./img/u12.png" alt="" />
+                </div>
+                <div class="module h-100 d-flex align-items-center pl-2">
+                  <div class="info">
+                    <p class="number text-center">36</p>
+                    <div class="text-img d-flex justify-content-center">
+                      <span class="text d-block">回访总数</span>
+                      <span class="bg">?</span>
+                    </div>
+                  </div>
+                  <img src="./img/u12.png" alt="" />
+                </div>
+                <div class="module h-100 d-flex align-items-center pl-2">
+                  <div class="info">
+                    <p class="number text-center">36%</p>
+                    <div class="text-img d-flex justify-content-center">
+                      <span class="text d-block">入住转化率</span>
+                      <span class="bg">?</span>
+                    </div>
+                  </div>
+                  <img src="./img/u12.png" alt="" />
+                </div>
+                <div class="module h-100 d-flex align-items-center pl-2">
+                  <div class="info">
+                    <p class="number text-center">999</p>
+                    <div class="text-img d-flex justify-content-center">
+                      <span class="text d-block">老人数据库维护</span>
+                      <span class="bg">?</span>
+                    </div>
+                  </div>
+                  <img src="./img/u12.png" alt="" />
+                </div>
+                <div class="module red h-100 d-flex align-items-center pl-2">
+                  <div class="info">
+                    <p class="number text-center">100</p>
+                    <div class="text-img d-flex justify-content-center">
+                      <span class="text d-block">投诉数</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="top-chart d-flex">
+                <div class="left">
+                  <div class="bg-border h-100 son" id="consult-data"></div>
+                </div>
+                <div class="right">
+                  <div class="bg-border h-100" id="consult-channel"></div>
+                </div>
+              </div>
+              <div class="middle-chart d-flex">
+                <div class="left">
+                  <div class="bg-border h-100" id="consult-ranking"></div>
+                </div>
+                <div class="right">
+                  <div class="bg-border h-100" id="consult-classify"></div>
+                </div>
+              </div>
+              <div class="bottom-chart d-flex">
+                <div class="left">
+                  <div class="bg-border h-100" id="complaint-ranking"></div>
+                </div>
+                <div class="right">
+                  <div class="bg-border h-100" id="complaint-channel"></div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="box2">
+              <div class="top">
+                <div class="title">
+                  <span>床位入住情况统计</span>
+                </div>
+                <div class="overview d-flex">
+                  <div class="left">
+                    <div class="indicator bg-border d-flex flex-row justify-content-start">
+                      <div class="module red h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">66</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">入住总指标</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                        <img src="./img/u12.png" alt="" />
+                      </div>
+                      <div class="module red h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">33</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">已入住</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                        <img src="./img/u12.png" alt="" />
+                      </div>
+                      <div class="module red h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">50%</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">完成率</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="right">
+                    <div class="total bg-border d-flex flex-row justify-content-start">
+                      <div class="module h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">672</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">总床位</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                        <img src="./img/u12.png" alt="" />
+                      </div>
+                      <div class="module h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">354</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">入住床位</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                        <img src="./img/u12.png" alt="" />
+                      </div>
+                      <div class="module h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">318</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">空置床位</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                        <img src="./img/u12.png" alt="" />
+                      </div>
+                      <div class="module h-100 d-flex align-items-center pl-2">
+                        <div class="info">
+                          <p class="number text-center">53%</p>
+                          <div class="text-img d-flex justify-content-center">
+                            <span class="text d-block">总入住率</span>
+                            <span class="bg">?</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="top-chart d-flex">
+                  <div class="left">
+                    <div class="month-indicator bg-border w-100" id="bed-reside"></div>
+                  </div>
+                  <div class="right">
+                    <div class="live-rate bg-border" id="bed-rate"></div>
+                  </div>
+                </div>
+                <div class="bottom-chart bg-border" id="bed-trend"></div>
+              </div>
+              <div class="bottom bg-border">
+                <div class="table-top">
+                  <div class="title">
+                    <span>家庭养老床位统计</span>
+                  </div>
+                  <div class="d-flex">
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">66</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">床位总数</span>
+                          <span class="bg">?</span>
+                        </div>
+                      </div>
+                      <img src="./img/u12.png" alt="" />
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">66</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">自理</span>
+                          <span class="bg">?</span>
+                        </div>
+                      </div>
+                      <img src="./img/u12.png" alt="" />
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">66</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">轻度失能</span>
+                          <span class="bg">?</span>
+                        </div>
+                      </div>
+                      <img src="./img/u12.png" alt="" />
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">66</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">中度失能</span>
+                          <span class="bg">?</span>
+                        </div>
+                      </div>
+                      <img src="./img/u12.png" alt="" />
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">66</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">重度失能</span>
+                          <span class="bg">?</span>
+                        </div>
+                      </div>
+                      <img src="./img/u12.png" alt="" />
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">66</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">已看护</span>
+                          <span class="bg">?</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-bottom">
+                  <table id="bed-statistics"></table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="box3">
+              <div class="overview bg-border">
+                <div class="title">
+                  <span>护理等级总概况</span>
+                </div>
+                <div class="module-container d-flex align-items-center justify-content-start">
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">236</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">在院老人总数</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">125</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">介助一级</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">25</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">介助二级</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">672</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">介助三级</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">672</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">介助四级</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">672</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">介助五级</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">672</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">介助六级</span>
+                      </div>
+                    </div>
+                    <img src="./img/u12.png" alt="" />
+                  </div>
+                  <div class="module h-100 d-flex align-items-center pl-2">
+                    <div class="info">
+                      <p class="number text-center">672</p>
+                      <div class="text-img d-flex justify-content-center">
+                        <span class="text d-block">特殊处理</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom d-flex">
+                <div class="left">
+                  <div class="nursing bg-border" id="nurse-level"></div>
+                </div>
+                <div class="right">
+                  <div class="age-distribution bg-border">
+                    <div class="h-50 w-100" id="age-distribution"></div>
+                    <div class="h-50 w-100" id="gender-distribution"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="box4">
+              <div class="top bg-border">
+                <div class="title">
+                  <span>站点服务</span>
+                </div>
+                <div class="infomation d-flex">
+                  <div class="info-left d-flex align-items-center justify-content-start">
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">年度指标</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">年度总服务量</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">总完成率</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">年度助餐量</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="info-right d-flex align-items-center justify-content-start">
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月指标</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月服务量</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月完成率</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月助餐量</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="content-table d-flex">
+                  <div class="table-left">
+                    <div class="table-container bg-border">
+                      <div class="title">
+                        <span>完成率排名（年度）</span>
+                      </div>
+                      <table id="station-year"></table>
+                    </div>
+                  </div>
+                  <div class="table-right">
+                    <div class="table-container bg-border">
+                      <div class="title">
+                        <span>完成率排名（当月）</span>
+                      </div>
+                      <table id="station-month"></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom bg-border">
+                <div class="title">
+                  <span>上门服务</span>
+                </div>
+                <div class="infomation d-flex">
+                  <div class="info-left d-flex align-items-center justify-content-start">
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">年度指标</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">年度总服务量</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">总完成率</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">上门服务量于总服务量占比</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="info-right d-flex align-items-center justify-content-start">
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月指标</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月服务量</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="module h-100 d-flex align-items-center pl-2">
+                      <div class="info">
+                        <p class="number text-center">318</p>
+                        <div class="text-img d-flex justify-content-center">
+                          <span class="text d-block">当月完成率</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="content-table d-flex">
+                  <div class="table-left">
+                    <div class="table-container bg-border">
+                      <div class="title">
+                        <span>上门服务（年度）</span>
+                      </div>
+                      <table id="server-year"></table>
+                    </div>
+                  </div>
+                  <div class="table-right">
+                    <div class="table-container bg-border">
+                      <div class="title">
+                        <span>上门服务（当月）</span>
+                      </div>
+                      <table id="server-month"></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="box5">
+              <div class="overview bg-border">
+                <table id="task"></table>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="list d-flex">
+            <div
+              class="list-item d-flex align-items-center justify-content-center"
+              :class="{active:index==isClass}"
+              v-for="(item,index) in list"
+              :key="index"
+              @click="changeBox(index)"
+            >
+              <span>{{item}}</span>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js"></script>
+    <script src="./js/myEchart.js"></script>
+    <script>
+      let months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+      let list = ['平台使用情况', '客户咨询', '床位统计', '在院老人', '服务数据', '任务计划看板'];
+      // 获取当前月份
+      let currentMonth = new Date().getMonth();
+
+      let vm = new Vue({
+        el: '#app',
+        data: {
+          months,
+          list,
+          // 显示当前月份图表信息
+          isActive: currentMonth,
+          // 显示当前显示的类型
+          isClass: 0,
+        },
+        created: function () {
+          setTimeout(() => {
+            // 默认初始化平台使用情况中的图表
+            initChart0();
+          }, 500);
+        },
+        methods: {
+          monthClick(index) {
+            // 改变tab
+            this.isActive = index;
+            // ajax请求对应月份的数据
+            // $.ajax({
+
+            // })
+          },
+          changeBox(index) {
+            // 更改showBox数组中对应的值，切换对应的box显示
+            // for (const i in this.showBox) {
+            //   this.$set(this.showBox, i, false);
+            //   if (i == index) {
+            //     this.$set(this.showBox, i, true);
+            //     // 根据showBox数组中真值的索引，给对应的分类加上样式
+            //     this.isClass = index;
+            //   }
+            // }
+            // 初始化对应tab页图表
+            setTimeout(() => {
+              switch (index) {
+                case 0:
+                  initChart0();
+                  break;
+                case 1:
+                  initChart1();
+                  break;
+                case 2:
+                  initChart2();
+                  break;
+                case 3:
+                  initChart3();
+                  break;
+              }
+            }, 500);
+          },
+        },
+      });
+    </script>
+    <script src="./js/myBootstrap-table.js"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="popover"]').popover();
+      });
+    </script>
+  </body>
+</html>

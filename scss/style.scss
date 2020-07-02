@@ -1,0 +1,458 @@
+html,
+body {
+  font-size: 12px;
+  background-color: #f2f2f2;
+  font-family: 'Arial Normal', 'Arial', 'Microsoft YaHei';
+}
+
+// 公共样式库
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  border: 0;
+}
+
+.bg-border {
+  background-color: #fff;
+  border: 1px solid rgba(228, 228, 228, 1);
+}
+
+table td {
+  font-size: 13px;
+  color: #333;
+}
+
+.module {
+  width: 170px;
+  box-sizing: border-box;
+  .info {
+    // height: 65px;
+    margin: 0 auto;
+    .number {
+      font-size: 28px;
+      color: #66c;
+    }
+    .text-img {
+      .text {
+        font-size: 15px;
+        color: #5e5e5e;
+      }
+      .bg {
+        background: url('../img/u11.png');
+        background-size: 14px 14px;
+        height: 14px;
+        width: 14px;
+        color: #fff;
+        margin-left: 10px;
+        margin-top: 5px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+    }
+  }
+  img {
+    height: 41px;
+    width: 2px;
+  }
+}
+
+.module.red {
+  .info {
+    .number {
+      color: red;
+    }
+  }
+}
+
+.container-fluid {
+  position: relative;
+  padding-top: 188px;
+  .header {
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 9999;
+    .logo-content {
+      font-size: 16px;
+      height: 5rem;
+      background-color: #333333;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .options {
+      height: 66px;
+      background-color: rgba(255, 255, 255, 1);
+      color: #333;
+      .left {
+        padding-left: 10px;
+        select {
+          width: 250px;
+          height: 32px;
+        }
+      }
+      .right {
+        select {
+          width: 87px;
+          height: 32px;
+          option {
+            height: 30px;
+            width: 100%;
+            border: 1px solid red;
+          }
+        }
+        .months {
+          .month {
+            width: 67px;
+            height: 32px;
+            border-color: rgba(215, 215, 215, 1);
+            border-style: solid;
+            border-width: 1px;
+            // border-left: 1px;
+            // border-top: 1px;
+            // border-bottom: 1px;
+            border-right: none;
+            font-size: 14px;
+            a {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+          .month:last-child {
+            border-right: 1px solid rgba(215, 215, 215, 1);
+          }
+          .month.active {
+            a {
+              background-color: #0099ff;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    .nav {
+      height: 62px;
+      width: 100%;
+      background-color: #f2f2f2;
+      padding-left: 25px;
+      .nav-item {
+        cursor: pointer;
+        width: 121px;
+        height: 41px;
+        border-color: rgba(215, 215, 215, 1);
+        border-style: solid;
+        border-left-width: 1px;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-right-width: 0;
+        font-size: 15px;
+        color: #333;
+        background-color: #fff;
+        display: flex;
+        a {
+          // align-items: center;
+          // justify-content: center;
+          width: 100%;
+          height: 100%;
+          border-radius: 0;
+          background-color: #fff;
+          display: block;
+          padding: 0;
+          text-align: center;
+          line-height: 41px;
+        }
+        a.active {
+          background-color: #5d8ef6;
+        }
+      }
+      .nav-item:last-child {
+        border-right-width: 1px;
+      }
+      .nav-item.active {
+        background-color: #5d8ef6;
+        color: #fff;
+      }
+    }
+  }
+  .content {
+    // padding-top: 25px;
+    padding-bottom: 42px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .box {
+      .title {
+        height: 72px;
+        font-size: 18px;
+        color: #5e5e5e;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+      }
+      #box0 {
+        margin-top: -1px;
+        .top {
+          padding: 27px 41px 0;
+          .overview {
+            border: 1px solid rgba(228, 228, 228, 1);
+            height: 106px;
+            padding-left: 18px;
+          }
+          .content-chart {
+            padding: 26px 0;
+            // height: 400px;
+            .left,
+            .right {
+              box-sizing: border-box;
+              width: 50%;
+              .chart {
+                height: 520px;
+                border: 1px solid rgba(228, 228, 228, 1);
+              }
+            }
+            .left {
+              padding-right: 9px;
+            }
+            .right {
+              padding-left: 9px;
+              .chart {
+                padding-left: 33px;
+                padding-right: 33px;
+                .title {
+                  height: 50px;
+                }
+              }
+            }
+          }
+        }
+        .bottom {
+          min-height: 670px;
+          background-color: #fff;
+          padding: 0px 41px 30px;
+          margin-top: 22px;
+          border: 1px solid rgba(228, 228, 228, 1);
+          .content-table {
+          }
+        }
+      }
+      #box1 {
+        padding: 14px 0 19px;
+        .overview {
+          height: 106px;
+          padding-left: 18px;
+        }
+        .left,
+        .right {
+          width: 50%;
+        }
+        .left {
+          padding-right: 15px;
+        }
+        .right {
+          padding-left: 15px;
+        }
+        .top-chart {
+          margin-top: 13px;
+          .left,
+          .right {
+            height: 425px;
+          }
+        }
+        .middle-chart {
+          margin-top: 26px;
+          .left,
+          .right {
+            height: 460px;
+          }
+        }
+        .bottom-chart {
+          margin-top: 27px;
+          .left,
+          .right {
+            height: 359px;
+          }
+        }
+      }
+      #box2 {
+        .left,
+        .right {
+          width: 50%;
+        }
+        .left {
+          padding-right: 11px;
+        }
+        .right {
+          padding-left: 11px;
+        }
+        .top {
+          height: 1035px;
+          padding-left: 28px;
+          padding-right: 28px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgba(228, 228, 228, 1);
+          border-top-width: 0;
+          background-color: #fff;
+          .overview {
+            .left {
+              .indicator {
+                height: 113px;
+              }
+            }
+            .right {
+              .total {
+                height: 113px;
+              }
+            }
+          }
+          .top-chart {
+            margin-top: 16px;
+            .left {
+              .month-indicator {
+                height: 441px;
+              }
+            }
+            .right {
+              .live-rate {
+                height: 441px;
+              }
+            }
+          }
+          .bottom-chart {
+            margin-top: 10px;
+            height: 360px;
+          }
+        }
+        .bottom {
+          height: 697px;
+          margin-top: 18px;
+          padding-left: 28px;
+          padding-right: 28px;
+          .table-top {
+          }
+          .table-bottom {
+            padding-top: 40px;
+          }
+        }
+      }
+      #box3 {
+        .left,
+        .right {
+          width: 50%;
+        }
+        .left {
+          padding-right: 8px;
+        }
+        .right {
+          padding-left: 8px;
+        }
+        .overview {
+          height: 174px;
+          margin-top: 10px;
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+        .bottom {
+          margin-top: 10px;
+          .left {
+            .nursing {
+              height: 673px;
+            }
+          }
+          .right {
+            .age-distribution {
+              height: 673px;
+            }
+          }
+        }
+      }
+      #box4 {
+        .top,
+        .bottom {
+          margin-top: 12px;
+          height: 728px;
+          padding-left: 28px;
+          padding-right: 28px;
+          .infomation {
+            .info-left,
+            .info-right {
+              width: 50%;
+              .module {
+                .number {
+                  font-size: 24px;
+                }
+              }
+            }
+            .info-right {
+              .module {
+                .number {
+                  color: #6c6;
+                }
+              }
+            }
+          }
+          .content-table {
+            margin-top: 15px;
+            .table-left,
+            .table-right {
+              width: 50%;
+              .table-container {
+                height: 548px;
+                padding: 0 25px;
+                .title {
+                  height: 53px;
+                  color: #333;
+                }
+              }
+            }
+            .table-left {
+              padding-right: 10px;
+            }
+            .table-right {
+              padding-left: 10px;
+            }
+          }
+        }
+        .top {
+        }
+        .bottom {
+          margin-top: 10px;
+          height: 771px;
+        }
+      }
+      #box5 {
+        margin-top: -1px;
+        .overview {
+          min-height: 800px;
+          .subTable {
+            text-align: center;
+            th {
+              border: none;
+              font-size: 13px;
+              height: 35px;
+              line-height: 35px;
+            }
+            td {
+              font-size: 12px;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
